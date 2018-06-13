@@ -117,12 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txtTexto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 422</value>
+  </data>
+  <data name="txtTexto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>760, 115</value>
+  </data>
   <data name="imlIconos.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADc
-        CQAAAk1TRnQBSQFMAgEBAwEAASABAQEgAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADW
+        CQAAAk1TRnQBSQFMAgEBAwEAATgBAQE4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -155,19 +162,30 @@
         AfQBVQFWAU8BGgF5AcMBegFMAfQaAAEkAXoCWQtTASsBTwJWAZgI/wH0AVUBVgFPAQABGgEyAcMBegFM
         GgABJAF6A1kKUwErAU8DVgFPAVUBTwFyAZgBTwFVAk8CVgFPAgABGgFTAcMBegFSAfQBAAH0AvMB/xMA
         ASQCegNZCVMBKwFPBVYBSQL/AZgBVQRWAU8DAAEaATIBoAErAQcBZgGRArUBZgG8EgABJAR6A1kHUwEr
-        AVAEVgFyBP8BcgFVBFYEAAEaAVMB8AH3AvUB9AHiARkBtQH3Af8QAAEkAZoEegNZBFMCegFMAngCVgEC
-        Bv8BcgJWAXgBmAUAAf8BrgL/AfUB9AMZAQkB7hAAASQEmgp6AUwBeAKZAXgBGwH0BP8B9AHzAXgBmAGZ
-        AZgFAAHxAfQB/wL1AfQCGQEJARkBtRAAASUJmgV6AUwBeAGZApgBeAGYBP8DeAGYAZkBmAUAAfAD9QP0
-        AhkBCQG0EAABJQ6aAUwBeASZAZgE/wGYBJkBmAUAAfEB9QT0AxkBCQG0EAABJQSaAUwJJQEaAXgEmQGY
-        BP8BmASZAZgFAAHyAeIEGQL1ARkBCQG0EAABJQEaA6ABUgoAAZgBnwSZBP8BCASZAZgFAAHzAQkHGQEJ
-        AQcQAAErBJoBTAoAAZgBnwKZAZ8BmQT/BZkBmAYAAe4BCQEZAQkDGQEJAbQB8REABBoB8woAAZgEnwaZ
-        BJ8BmQYAAf8B8AUJAbUB8SIAAZkNmAHzCAAB9AG8Ae4BBwHwAf8SAAFCAU0BPgcAAT4DAAEoAwABQAMA
-        ARADAAEBAQABAQUAAYAXAAP/AQABgAMAAQ8B/wYAAQ8B/wYAAQMB/wYAAYMB/wYAAcABhwYAAeABAwYA
-        AfAHAAH4BwAB+AcAAfgHAAH4BwAB+AMAAQMB/wIAAfgDAAEDAf8CAAH8AwABgwH/AgAB/AEBAgAC/wGA
-        AQAB/wEDAgAL
+        AVAEVgFyBP8BcgFVBFYEAAEaAVMB8AH3Av8B9AHiARkBtQH3Af8QAAEkAZoEegNZBFMCegFMAngCVgEC
+        Bv8BcgJWAXgBmAUAAf8BrgP/AfQDGQEJAbwQAAEkBJoKegFMAXgCmQF4ARsB9AT/AfQB8wF4AZgBmQGY
+        BQAB8QH0A/8B9AIZAQkBGQG1EAABJQmaBXoBTAF4AZkCmAF4AZgE/wN4AZgBmQGYBQAB8AP/A/QCGQEJ
+        AbQQAAElDpoBTAF4BJkBmAT/AZgEmQGYBQAB8QH/BPQDGQEJAbQQAAElBJoBTAklARoBeASZAZgE/wGY
+        BJkBmAUAAfIB4gQZAv8BGQEJAbQQAAElARoDoAFSCgABmAGfBJkE/wEIBJkBmAUAAfMBCQcZAQkBBxAA
+        ASsEmgFMCgABmAGfApkBnwGZBP8FmQGYBgABvAEJARkBCQMZAQkBtAHxEQAEGgHzCgABmASfBpkEnwGZ
+        BgAB/wHwBQkBtQHxIgABmQ2YAfMIAAH0ArwBBwHwAf8SAAFCAU0BPgcAAT4DAAEoAwABQAMAARADAAEB
+        AQABAQUAAYAXAAP/AQABgAMAAQ8B/wYAAQ8B/wYAAQMB/wYAAYMB/wYAAcABhwYAAeABAwYAAfAHAAH4
+        BwAB+AcAAfgHAAH4BwAB+AMAAQMB/wIAAfgDAAEDAf8CAAH8AwABgwH/AgAB/AEBAgAC/wGAAQAB/wED
+        AgAL
 </value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>373, 75</value>
+  </data>
+  <data name="btnCarpetaDestino.Location" type="System.Drawing.Point, System.Drawing">
+    <value>622, 18</value>
+  </data>
+  <data name="btnBaseDatos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>622, 97</value>
+  </data>
+  <data name="btnGenerar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>677, 393</value>
+  </data>
   <data name="chkGenerarBe.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 17</value>
   </data>
@@ -187,12 +205,39 @@
     <value>Datos</value>
   </data>
   <data name="chkAutentificacion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 47</value>
-  </data>
-  <data name="txtServidor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 20</value>
+    <value>550, 48</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtServidor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txtServidor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 20</value>
+  </data>
+  <data name="txtClave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>464, 73</value>
+  </data>
+  <data name="txtCarpetaDestino.Size" type="System.Drawing.Size, System.Drawing">
+    <value>517, 20</value>
+  </data>
+  <data name="cboBaseDatos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>517, 21</value>
+  </data>
+  <data name="grpLenguaje.Location" type="System.Drawing.Point, System.Drawing">
+    <value>677, 179</value>
+  </data>
+  <data name="grpCodigo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>679, 73</value>
+  </data>
+  <data name="grpTablas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 207</value>
+  </data>
+  <data name="grpTablas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>657, 209</value>
+  </data>
+  <data name="dgvTablas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>645, 184</value>
+  </data>
   <data name="btnServidores.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -203,8 +248,56 @@
   <data name="btnServidores.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="btnServidores.Location" type="System.Drawing.Point, System.Drawing">
+    <value>464, 44</value>
+  </data>
   <data name="btnServidores.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
+  </data>
+  <data name="grpConfiguracion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 73</value>
+  </data>
+  <data name="grpConfiguracion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>657, 128</value>
+  </data>
+  <data name="lblVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="lblVersion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>634, 540</value>
+  </data>
+  <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 13</value>
+  </data>
+  <data name="lblVersion.Text" xml:space="preserve">
+    <value>Version 2.0.0.0</value>
+  </data>
+  <data name="lblVersion.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblContact.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblContact.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblContact.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="lblContact.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblContact.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 13</value>
+  </data>
+  <data name="lblContact.Text" xml:space="preserve">
+    <value>Desarrollador : Afu Tse [solapa@gmail.com]</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>784, 562</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

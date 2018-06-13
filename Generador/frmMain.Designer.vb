@@ -1,6 +1,6 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmMain
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -48,8 +48,9 @@ Partial Class frmMain
         Me.grpTablas = New System.Windows.Forms.GroupBox()
         Me.dgvTablas = New System.Windows.Forms.DataGridView()
         Me.grpConfiguracion = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.btnServidores = New System.Windows.Forms.Button()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.lblContact = New System.Windows.Forms.Label()
         Me.grpLenguaje.SuspendLayout()
         Me.grpCodigo.SuspendLayout()
         Me.grpTablas.SuspendLayout()
@@ -243,11 +244,6 @@ Partial Class frmMain
         Me.grpConfiguracion.Name = "grpConfiguracion"
         Me.grpConfiguracion.TabStop = False
         '
-        'Label7
-        '
-        resources.ApplyResources(Me.Label7, "Label7")
-        Me.Label7.Name = "Label7"
-        '
         'btnServidores
         '
         resources.ApplyResources(Me.btnServidores, "btnServidores")
@@ -255,11 +251,22 @@ Partial Class frmMain
         Me.btnServidores.Name = "btnServidores"
         Me.btnServidores.UseVisualStyleBackColor = True
         '
+        'lblVersion
+        '
+        resources.ApplyResources(Me.lblVersion, "lblVersion")
+        Me.lblVersion.Name = "lblVersion"
+        '
+        'lblContact
+        '
+        resources.ApplyResources(Me.lblContact, "lblContact")
+        Me.lblContact.Name = "lblContact"
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.lblContact)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.grpConfiguracion)
         Me.Controls.Add(Me.grpTablas)
         Me.Controls.Add(Me.grpCodigo)
@@ -308,7 +315,7 @@ Partial Class frmMain
     Friend WithEvents grpTablas As System.Windows.Forms.GroupBox
     Friend WithEvents dgvTablas As System.Windows.Forms.DataGridView
     Friend WithEvents grpConfiguracion As System.Windows.Forms.GroupBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents lblVersion As System.Windows.Forms.Label
     Friend WithEvents btnServidores As System.Windows.Forms.Button
-
+    Friend WithEvents lblContact As Label
 End Class

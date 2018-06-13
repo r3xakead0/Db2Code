@@ -123,15 +123,23 @@
   <data name="&gt;&gt;btnBaseDatos.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdbVBNET.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;rdbCSHARP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>grpConfiguracion</value>
   </data>
   <data name="&gt;&gt;txtServidor.Name" xml:space="preserve">
     <value>txtServidor</value>
+  </data>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grpLenguaje.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;imlIconos.Name" xml:space="preserve">
+    <value>imlIconos</value>
   </data>
   <data name="&gt;&gt;fbdCarpetaDestino.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -141,31 +149,32 @@
     <value>101, 98</value>
   </data>
   <data name="&gt;&gt;grpTablas.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;btnGenerar.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;chkGenerarBe.Name" xml:space="preserve">
     <value>chkGenerarBe</value>
   </data>
-  <data name="chkAutentificacion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
-  <data name="&gt;&gt;txtTexto.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;grpTablas.Name" xml:space="preserve">
+    <value>grpTablas</value>
   </data>
-  <data name="grpCodigo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 100</value>
+  <data name="&gt;&gt;btnServidores.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
   </data>
-  <data name="&gt;&gt;grpCodigo.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;chkAutentificacion.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cboBaseDatos.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="&gt;&gt;chkAutentificacion.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
   </data>
   <data name="&gt;&gt;btnGenerar.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -176,23 +185,29 @@
   <data name="chkGenerarBe.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
+  <data name="&gt;&gt;lblVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="grpLenguaje.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="chkGenerarSql.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 17</value>
+  <data name="grpLenguaje.Text" xml:space="preserve">
+    <value>Lenguaje</value>
   </data>
   <data name="&gt;&gt;txtServidor.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkGenerarBe.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;grpCodigo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Base de Datos</value>
   </data>
   <data name="grpCodigo.Text" xml:space="preserve">
     <value>Codigo</value>
@@ -200,18 +215,23 @@
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkGenerarSql.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
   <data name="&gt;&gt;dgvTablas.Parent" xml:space="preserve">
     <value>grpTablas</value>
   </data>
+  <data name="btnGenerar.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="&gt;&gt;txtServidor.Parent" xml:space="preserve">
     <value>grpConfiguracion</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="chkAutentificacion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="chkGenerarLn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 17</value>
   </data>
   <data name="chkAutentificacion.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -225,8 +245,8 @@
   <data name="&gt;&gt;txtUsuario.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Base de Datos</value>
+  <data name="&gt;&gt;lblContact.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 23</value>
@@ -240,14 +260,12 @@
   <data name="&gt;&gt;cboBaseDatos.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="chkGenerarBe.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="grpConfiguracion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 11</value>
   </data>
-  <data name="&gt;&gt;btnServidores.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
-  </data>
-  <data name="&gt;&gt;txtClave.Name" xml:space="preserve">
-    <value>txtClave</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkAutentificacion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;txtTexto.Parent" xml:space="preserve">
     <value>$this</value>
@@ -255,14 +273,14 @@
   <data name="&gt;&gt;rdbVBNET.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="dgvTablas.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="btnGenerar.Text" xml:space="preserve">
     <value>Generar</value>
   </data>
   <data name="btnServidores.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
-  </data>
-  <data name="&gt;&gt;grpLenguaje.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="rdbVBNET.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
@@ -273,17 +291,23 @@
   <data name="grpCodigo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="txtCarpetaDestino.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 20</value>
-  </data>
   <data name="chkAutentificacion.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="txtServidor.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
+  <data name="grpTablas.Text" xml:space="preserve">
+    <value>Tablas</value>
+  </data>
   <data name="&gt;&gt;chkGenerarBe.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rdbVBNET.Text" xml:space="preserve">
+    <value>VB.NET</value>
+  </data>
+  <data name="chkGenerarLn.Text" xml:space="preserve">
+    <value>LN</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -375,8 +399,8 @@
   <data name="&gt;&gt;rdbVBNET.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtUsuario.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -390,17 +414,14 @@
   <data name="btnCarpetaDestino.Location" type="System.Drawing.Point, System.Drawing">
     <value>562, 18</value>
   </data>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
   <data name="txtClave.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Usuario</value>
-  </data>
-  <data name="cboBaseDatos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 21</value>
   </data>
   <data name="grpConfiguracion.Text" xml:space="preserve">
     <value>Configuracion</value>
@@ -411,23 +432,26 @@
   <data name="&gt;&gt;rdbVBNET.Parent" xml:space="preserve">
     <value>grpLenguaje</value>
   </data>
+  <data name="btnCarpetaDestino.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="grpConfiguracion.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
   </data>
-  <data name="&gt;&gt;btnBaseDatos.Name" xml:space="preserve">
-    <value>btnBaseDatos</value>
+  <data name="&gt;&gt;dgvTablas.Name" xml:space="preserve">
+    <value>dgvTablas</value>
   </data>
   <data name="&gt;&gt;txtTexto.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grpTablas.Text" xml:space="preserve">
-    <value>Tablas</value>
-  </data>
   <data name="chkGenerarLn.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 47</value>
   </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Version 2.0</value>
+  <data name="&gt;&gt;rdbCSHARP.Name" xml:space="preserve">
+    <value>rdbCSHARP</value>
+  </data>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imlIconos.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -438,17 +462,14 @@
   <data name="&gt;&gt;cboBaseDatos.Name" xml:space="preserve">
     <value>cboBaseDatos</value>
   </data>
-  <data name="&gt;&gt;chkGenerarSql.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="grpLenguaje.Location" type="System.Drawing.Point, System.Drawing">
+    <value>615, 117</value>
   </data>
   <data name="btnGenerar.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>
   </data>
-  <data name="rdbCSHARP.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="grpConfiguracion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 11</value>
+  <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>701, 540</value>
   </data>
   <data name="&gt;&gt;txtCarpetaDestino.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -463,25 +484,28 @@
     <value>Label5</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <data name="btnGenerar.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="&gt;&gt;grpCodigo.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnGenerar.Name" xml:space="preserve">
     <value>btnGenerar</value>
-  </data>
-  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -495,8 +519,11 @@
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 75</value>
   </data>
-  <data name="grpTablas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>597, 130</value>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
   </data>
   <data name="&gt;&gt;txtCarpetaDestino.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -507,6 +534,12 @@
   <data name="&gt;&gt;grpConfiguracion.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="txtCarpetaDestino.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="btnBaseDatos.ImageIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -516,9 +549,6 @@
   <data name="btnBaseDatos.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="chkGenerarLn.Text" xml:space="preserve">
-    <value>LN</value>
-  </data>
   <data name="&gt;&gt;txtUsuario.Name" xml:space="preserve">
     <value>txtUsuario</value>
   </data>
@@ -526,10 +556,13 @@
     <value>24, 23</value>
   </data>
   <data name="&gt;&gt;grpLenguaje.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
-  <data name="rdbVBNET.Text" xml:space="preserve">
-    <value>VB.NET</value>
+  <data name="&gt;&gt;rdbCSHARP.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpConfiguracion.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;grpCodigo.Name" xml:space="preserve">
     <value>grpCodigo</value>
@@ -543,17 +576,11 @@
   <data name="chkGenerarBe.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 70</value>
   </data>
-  <data name="rdbCSHARP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 51</value>
-  </data>
   <data name="&gt;&gt;chkGenerarSql.Name" xml:space="preserve">
     <value>chkGenerarSql</value>
   </data>
   <data name="txtClave.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 20</value>
-  </data>
-  <data name="&gt;&gt;btnCarpetaDestino.Name" xml:space="preserve">
-    <value>btnCarpetaDestino</value>
   </data>
   <data name="btnServidores.Location" type="System.Drawing.Point, System.Drawing">
     <value>404, 44</value>
@@ -566,6 +593,9 @@
   </data>
   <data name="rdbVBNET.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 28</value>
+  </data>
+  <data name="txtCarpetaDestino.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
   <data name="&gt;&gt;rdbCSHARP.Parent" xml:space="preserve">
     <value>grpLenguaje</value>
@@ -588,41 +618,41 @@
   <data name="rdbCSHARP.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
   </data>
+  <data name="txtTexto.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;chkGenerarBe.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="grpTablas.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 145</value>
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
-  </data>
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
+  </data>
+  <data name="cboBaseDatos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>457, 21</value>
   </data>
   <data name="txtUsuario.Location" type="System.Drawing.Point, System.Drawing">
     <value>101, 72</value>
   </data>
-  <data name="&gt;&gt;chkGenerarLn.Parent" xml:space="preserve">
-    <value>grpCodigo</value>
+  <data name="rdbCSHARP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 51</value>
+  </data>
+  <data name="rdbCSHARP.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;grpConfiguracion.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grpCodigo.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="&gt;&gt;rdbVBNET.Name" xml:space="preserve">
+    <value>rdbVBNET</value>
   </data>
   <data name="&gt;&gt;txtClave.Parent" xml:space="preserve">
     <value>grpConfiguracion</value>
   </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;chkGenerarLn.Name" xml:space="preserve">
-    <value>chkGenerarLn</value>
-  </data>
-  <data name="btnGenerar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 252</value>
+  <data name="&gt;&gt;btnCarpetaDestino.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
   </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>$this</value>
@@ -633,165 +663,18 @@
   <data name="&gt;&gt;txtCarpetaDestino.Parent" xml:space="preserve">
     <value>grpConfiguracion</value>
   </data>
-  <data name="txtClave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 73</value>
-  </data>
-  <data name="&gt;&gt;cboBaseDatos.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
-  </data>
-  <data name="&gt;&gt;dgvTablas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTablas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Servidor</value>
-  </data>
-  <data name="txtTexto.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;btnServidores.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 102</value>
-  </data>
-  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="txtTexto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>700, 115</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 49</value>
-  </data>
-  <data name="&gt;&gt;grpLenguaje.Name" xml:space="preserve">
-    <value>grpLenguaje</value>
-  </data>
-  <data name="&gt;&gt;chkGenerarBe.Parent" xml:space="preserve">
-    <value>grpCodigo</value>
-  </data>
-  <data name="grpTablas.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;chkAutentificacion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkGenerarBe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 17</value>
-  </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
-  </data>
-  <data name="&gt;&gt;rdbVBNET.Name" xml:space="preserve">
-    <value>rdbVBNET</value>
-  </data>
-  <data name="dgvTablas.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="btnBaseDatos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>562, 97</value>
-  </data>
-  <data name="txtTexto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 281</value>
-  </data>
-  <data name="&gt;&gt;chkAutentificacion.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Carpeta Destino</value>
-  </data>
-  <data name="&gt;&gt;grpTablas.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="chkAutentificacion.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="dgvTablas.Size" type="System.Drawing.Size, System.Drawing">
     <value>585, 105</value>
-  </data>
-  <data name="dgvTablas.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 75</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkGenerarSql.Text" xml:space="preserve">
-    <value>SQL</value>
-  </data>
-  <data name="&gt;&gt;txtClave.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="txtTexto.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="txtClave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="&gt;&gt;txtCarpetaDestino.Name" xml:space="preserve">
-    <value>txtCarpetaDestino</value>
-  </data>
-  <data name="&gt;&gt;chkGenerarSql.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="chkGenerarLn.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="grpConfiguracion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>597, 128</value>
-  </data>
-  <data name="chkGenerarSql.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 24</value>
-  </data>
-  <data name="chkGenerarLn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 17</value>
-  </data>
-  <data name="&gt;&gt;txtUsuario.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkAutentificacion.Text" xml:space="preserve">
-    <value>Autentificacion</value>
-  </data>
-  <data name="dgvTablas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>frmMain</value>
-  </data>
-  <data name="chkGenerarLn.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="btnCarpetaDestino.ImageIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="txtCarpetaDestino.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 19</value>
   </data>
   <data name="imlIconos.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACW
-        CAAAAk1TRnQBSQFMAgEBAgEAASwBAQF8AQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAgEAASwBAQGsAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -830,152 +713,323 @@
         AQABAQUAAYAXAAP/AQABgF8AAQMB/wYAAQMB/wYAAYMB/wYAAv8BgBsACw==
 </value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;grpTablas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grpLenguaje.Text" xml:space="preserve">
-    <value>Lenguaje</value>
-  </data>
-  <data name="btnGenerar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="btnCarpetaDestino.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="grpTablas.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="grpLenguaje.Location" type="System.Drawing.Point, System.Drawing">
-    <value>615, 117</value>
-  </data>
-  <data name="txtCarpetaDestino.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;rdbCSHARP.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtTexto.Name" xml:space="preserve">
-    <value>txtTexto</value>
-  </data>
-  <data name="&gt;&gt;btnServidores.Name" xml:space="preserve">
-    <value>btnServidores</value>
-  </data>
-  <data name="&gt;&gt;fbdCarpetaDestino.Name" xml:space="preserve">
-    <value>fbdCarpetaDestino</value>
-  </data>
-  <data name="grpLenguaje.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 84</value>
-  </data>
-  <data name="&gt;&gt;imlIconos.Name" xml:space="preserve">
-    <value>imlIconos</value>
-  </data>
-  <data name="&gt;&gt;chkGenerarLn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
-  </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
-  </data>
-  <data name="&gt;&gt;chkAutentificacion.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>724, 421</value>
-  </data>
-  <data name="btnBaseDatos.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="&gt;&gt;rdbCSHARP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkAutentificacion.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Clave</value>
-  </data>
-  <data name="rdbCSHARP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 17</value>
-  </data>
-  <data name="txtTexto.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="txtUsuario.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 20</value>
-  </data>
-  <data name="Label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
-  </data>
-  <data name="grpConfiguracion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="btnGenerar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 252</value>
   </data>
   <data name="&gt;&gt;btnBaseDatos.Parent" xml:space="preserve">
     <value>grpConfiguracion</value>
   </data>
-  <data name="txtCarpetaDestino.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+  <data name="&gt;&gt;btnServidores.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkGenerarSql.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblContact.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="txtTexto.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 49</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="grpTablas.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;btnCarpetaDestino.Name" xml:space="preserve">
+    <value>btnCarpetaDestino</value>
+  </data>
+  <data name="chkGenerarBe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 17</value>
+  </data>
+  <data name="Label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 540</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frmMain</value>
+  </data>
+  <data name="txtTexto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>700, 115</value>
+  </data>
+  <data name="dgvTablas.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;dgvTablas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
+    <value>Label6</value>
+  </data>
+  <data name="txtTexto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 281</value>
   </data>
   <data name="&gt;&gt;txtServidor.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="btnGenerar.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Carpeta Destino</value>
+  </data>
+  <data name="&gt;&gt;grpTablas.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 75</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>MaterialSkin.Controls.MaterialForm, MaterialSkin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="chkGenerarSql.Text" xml:space="preserve">
+    <value>SQL</value>
+  </data>
+  <data name="&gt;&gt;txtClave.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="rdbCSHARP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 17</value>
+  </data>
+  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtClave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;chkGenerarBe.Parent" xml:space="preserve">
+    <value>grpCodigo</value>
+  </data>
+  <data name="&gt;&gt;chkGenerarSql.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkGenerarLn.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="grpConfiguracion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 128</value>
+  </data>
+  <data name="chkGenerarSql.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 24</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="&gt;&gt;txtUsuario.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkAutentificacion.Text" xml:space="preserve">
+    <value>Autentificacion</value>
+  </data>
+  <data name="dgvTablas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="txtTexto.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="chkGenerarLn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnCarpetaDestino.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chkGenerarLn.Name" xml:space="preserve">
+    <value>chkGenerarLn</value>
+  </data>
+  <data name="chkAutentificacion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 17</value>
+  </data>
+  <data name="txtCarpetaDestino.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 19</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="&gt;&gt;lblContact.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTexto.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 102</value>
+  </data>
+  <data name="btnGenerar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="rdbVBNET.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtCarpetaDestino.Size" type="System.Drawing.Size, System.Drawing">
+    <value>457, 20</value>
   </data>
   <data name="txtServidor.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 20</value>
   </data>
-  <data name="&gt;&gt;grpTablas.Name" xml:space="preserve">
-    <value>grpTablas</value>
+  <data name="&gt;&gt;chkGenerarLn.Parent" xml:space="preserve">
+    <value>grpCodigo</value>
   </data>
-  <data name="btnCarpetaDestino.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="&gt;&gt;lblContact.Name" xml:space="preserve">
+    <value>lblContact</value>
   </data>
-  <data name="&gt;&gt;rdbCSHARP.Name" xml:space="preserve">
-    <value>rdbCSHARP</value>
+  <data name="&gt;&gt;btnServidores.Name" xml:space="preserve">
+    <value>btnServidores</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="grpCodigo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 11</value>
+  <data name="grpLenguaje.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 84</value>
+  </data>
+  <data name="lblContact.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 540</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="&gt;&gt;grpLenguaje.Name" xml:space="preserve">
+    <value>grpLenguaje</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>724, 421</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Servidor</value>
+  </data>
+  <data name="btnBaseDatos.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="txtClave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 73</value>
+  </data>
+  <data name="btnBaseDatos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>562, 97</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Clave</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Version 2.0</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Name" xml:space="preserve">
+    <value>lblVersion</value>
+  </data>
+  <data name="grpCodigo.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="txtUsuario.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 20</value>
+  </data>
+  <data name="&gt;&gt;chkAutentificacion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grpConfiguracion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="btnGenerar.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;cboBaseDatos.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
+  </data>
+  <data name="&gt;&gt;txtTexto.Name" xml:space="preserve">
+    <value>txtTexto</value>
+  </data>
+  <data name="&gt;&gt;btnBaseDatos.Name" xml:space="preserve">
+    <value>btnBaseDatos</value>
+  </data>
+  <data name="&gt;&gt;lblContact.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fbdCarpetaDestino.Name" xml:space="preserve">
+    <value>fbdCarpetaDestino</value>
+  </data>
+  <data name="grpCodigo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 100</value>
   </data>
   <data name="&gt;&gt;btnServidores.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnCarpetaDestino.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;chkGenerarLn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grpTablas.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="grpTablas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 130</value>
+  </data>
+  <data name="grpCodigo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 11</value>
+  </data>
+  <data name="&gt;&gt;txtCarpetaDestino.Name" xml:space="preserve">
+    <value>txtCarpetaDestino</value>
+  </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;dgvTablas.Name" xml:space="preserve">
-    <value>dgvTablas</value>
-  </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;txtUsuario.Parent" xml:space="preserve">
+    <value>grpConfiguracion</value>
   </data>
   <data name="&gt;&gt;btnGenerar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnCarpetaDestino.Parent" xml:space="preserve">
-    <value>grpConfiguracion</value>
+  <data name="&gt;&gt;txtClave.Name" xml:space="preserve">
+    <value>txtClave</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
+  <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
   </data>
-  <data name="&gt;&gt;grpConfiguracion.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;dgvTablas.ZOrder" xml:space="preserve">
     <value>0</value>

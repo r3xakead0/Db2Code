@@ -4,6 +4,8 @@ Imports System.Data
 Imports System.Globalization
 Imports System.Threading
 Imports System.ComponentModel
+Imports MaterialSkin
+Imports System.Reflection
 
 Public Class frmMain
 
@@ -1547,6 +1549,13 @@ Public Class frmMain
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
 
+            'Skin de formulario
+            Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+            SkinManager.AddFormToManage(Me)
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+
+            'Cambiar lenguaje de formulario
             Dim lenguaje As String = CultureInfo.CurrentCulture.Parent.Name
             Me.SuspendLayout()
             Dim resources As ComponentResourceManager = New ComponentResourceManager(GetType(frmMain))
@@ -1561,11 +1570,14 @@ Public Class frmMain
             Next c
             Me.ResumeLayout()
 
+            'Mostrar la version del sofware
+            Me.lblVersion.Text = $"Version {Assembly.GetExecutingAssembly().GetName().Version.ToString()}"
+
             dtTablas = New DataTable
             dtTablas.Columns.Add("Id", System.Type.GetType("System.Int32"))
             dtTablas.Columns.Add("Nombre", System.Type.GetType("System.String"))
 
-            For i As Integer = 0 To 5
+            For i As Integer = 0 To 10
                 Dim drTabla As DataRow = Me.dtTablas.NewRow
                 drTabla.Item("Id") = 0
                 drTabla.Item("Nombre") = ""
