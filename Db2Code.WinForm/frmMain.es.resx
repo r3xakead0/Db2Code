@@ -117,11 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="txtTexto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 422</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtConsole.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
-  <data name="txtTexto.Size" type="System.Drawing.Size, System.Drawing">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtConsole.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txtConsole.Size" type="System.Drawing.Size, System.Drawing">
     <value>760, 115</value>
   </data>
   <data name="imlIconos.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
@@ -129,7 +134,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADW
-        CQAAAk1TRnQBSQFMAgEBAwEAATgBAQE4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAwEAAWABAQFgAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -174,17 +179,83 @@
         AgAL
 </value>
   </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 75</value>
+  <data name="lblTargetFolder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="btnCarpetaDestino.Location" type="System.Drawing.Point, System.Drawing">
-    <value>622, 18</value>
+  <data name="lblTargetFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
   </data>
-  <data name="btnBaseDatos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>622, 97</value>
+  <data name="lblTargetFolder.Text" xml:space="preserve">
+    <value>Carpeta Destino</value>
   </data>
-  <data name="btnGenerar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>677, 393</value>
+  <data name="lblServer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblServer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="lblServer.Text" xml:space="preserve">
+    <value>Servidor</value>
+  </data>
+  <data name="lblUsername.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUsername.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="lblUsername.Text" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="lblPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblPassword.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="lblPassword.Text" xml:space="preserve">
+    <value>Clave</value>
+  </data>
+  <data name="lblDatabases.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDatabases.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="lblDatabases.Text" xml:space="preserve">
+    <value>Base de Datos</value>
+  </data>
+  <data name="btnTargetFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnTargetFolder.ImageIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnTargetFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 23</value>
+  </data>
+  <data name="btnDatabases.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnDatabases.ImageIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnDatabases.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 23</value>
+  </data>
+  <data name="btnGenerate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnGenerate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnGenerate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 23</value>
+  </data>
+  <data name="btnGenerate.Text" xml:space="preserve">
+    <value>Generar</value>
   </data>
   <data name="chkGenerarBe.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 17</value>
@@ -204,61 +275,158 @@
   <data name="chkGenerarSql.Text" xml:space="preserve">
     <value>Datos</value>
   </data>
-  <data name="chkAutentificacion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 48</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtServidor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="txtServidor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 20</value>
-  </data>
-  <data name="txtClave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>464, 73</value>
-  </data>
-  <data name="txtCarpetaDestino.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 20</value>
-  </data>
-  <data name="cboBaseDatos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 21</value>
-  </data>
-  <data name="grpLenguaje.Location" type="System.Drawing.Point, System.Drawing">
-    <value>677, 179</value>
-  </data>
-  <data name="grpCodigo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 73</value>
-  </data>
-  <data name="grpTablas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 207</value>
-  </data>
-  <data name="grpTablas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 209</value>
-  </data>
-  <data name="dgvTablas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>645, 184</value>
-  </data>
-  <data name="btnServidores.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="chkAutentification.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnServidores.ImageIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="chkAutentification.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="btnServidores.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkAutentification.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="chkAutentification.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 17</value>
+  </data>
+  <data name="chkAutentification.Text" xml:space="preserve">
+    <value>Autentificacion</value>
+  </data>
+  <data name="txtServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txtServer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 20</value>
+  </data>
+  <data name="txtUsername.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 20</value>
+  </data>
+  <data name="txtPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txtPassword.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 20</value>
+  </data>
+  <data name="txtTargetFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txtTargetFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>517, 20</value>
+  </data>
+  <data name="cboDatabases.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="cboDatabases.Size" type="System.Drawing.Size, System.Drawing">
+    <value>517, 21</value>
+  </data>
+  <data name="grpLanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="grpLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 84</value>
+  </data>
+  <data name="grpLanguage.Text" xml:space="preserve">
+    <value>Lenguaje</value>
+  </data>
+  <data name="grpCode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="grpCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 100</value>
+  </data>
+  <data name="grpCode.Text" xml:space="preserve">
+    <value>Codigo</value>
+  </data>
+  <data name="grpTables.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="lblRowsCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRowsCount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="lblRowsCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnServidores.Location" type="System.Drawing.Point, System.Drawing">
-    <value>464, 44</value>
+  <data name="lblRowsCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>535, 187</value>
   </data>
-  <data name="btnServidores.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblRowsCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="lblRowsCount.Text" xml:space="preserve">
+    <value>Nro. Registros</value>
+  </data>
+  <data name="btnSelectAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnSelectAll.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="btnSelectAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnSelectAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="btnSelectAll.Text" xml:space="preserve">
+    <value>Seleccionar Todos</value>
+  </data>
+  <data name="txtRowsCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txtRowsCount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="txtRowsCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>615, 183</value>
+  </data>
+  <data name="txtRowsCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 20</value>
+  </data>
+  <data name="txtRowsCount.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtRowsCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="dgvTables.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="dgvTables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>645, 158</value>
+  </data>
+  <data name="grpTables.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="grpTables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>657, 209</value>
+  </data>
+  <data name="grpTables.Text" xml:space="preserve">
+    <value>Tablas</value>
+  </data>
+  <data name="grpConfiguration.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="btnServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnServer.ImageIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnServer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnServer.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
   </data>
-  <data name="grpConfiguracion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 73</value>
-  </data>
-  <data name="grpConfiguracion.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="grpConfiguration.Size" type="System.Drawing.Size, System.Drawing">
     <value>657, 128</value>
+  </data>
+  <data name="grpConfiguration.Text" xml:space="preserve">
+    <value>Configuracion</value>
   </data>
   <data name="lblVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -267,13 +435,13 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 540</value>
+    <value>476, 540</value>
   </data>
   <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 13</value>
+    <value>296, 13</value>
   </data>
   <data name="lblVersion.Text" xml:space="preserve">
-    <value>Version 2.0.0.0</value>
+    <value>Version 2.2.0.0</value>
   </data>
   <data name="lblVersion.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -291,10 +459,22 @@
     <value>NoControl</value>
   </data>
   <data name="lblContact.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 13</value>
+    <value>90, 13</value>
   </data>
   <data name="lblContact.Text" xml:space="preserve">
-    <value>Desarrollador : Afu Tse [solapa@gmail.com]</value>
+    <value>Desarrollador :</value>
+  </data>
+  <data name="txtContact.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="txtContact.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="txtContact.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 13</value>
+  </data>
+  <data name="txtContact.Text" xml:space="preserve">
+    <value>Afu Tse [solapa@gmail.com]</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>784, 562</value>
@@ -373,5 +553,8 @@
         AQDAAAEAwAABAOAAAwDAAAEAwAABAMAAAQDAAAEAwAABAMAAAQDgAAMAwAABAMAAAQDAAAEAwAABAMAA
         AQDAAAEAwAABAOAAAwA=
 </value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
 </root>

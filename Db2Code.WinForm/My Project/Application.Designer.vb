@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Db2Code.frmMain
+            Me.MainForm = Global.Db2Code.Winform.FrmMain
         End Sub
     End Class
 End Namespace

@@ -1,22 +1,29 @@
 Imports System.IO
 Imports System.Data.SqlClient
-Imports System.Data
 Imports System.Globalization
-Imports System.Threading
 Imports System.ComponentModel
-Imports MaterialSkin
 Imports System.Reflection
+Imports MaterialSkin
+Imports Db2Code.Library
 
-Public Class frmMain
+Public Class FrmMain
+
+    Public Shared ReadOnly Property Instance As FrmMain
+        Get
+            Static _instance As FrmMain = New FrmMain
+            Return _instance
+        End Get
+    End Property
 
     Private strConexion As String = ""
     Private sLenguaje As String = ""
     Private dtTablas As DataTable = Nothing
+    Private bSelected As Boolean = False
 
     Private Sub GenerateClassBE_VBNET(ByRef drTable As DataRow)
         Try
 
-            Dim strUbicacion As String = Me.txtCarpetaDestino.Text & "\BE"
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\BE"
 
             If Not Directory.Exists(strUbicacion) Then
                 Directory.CreateDirectory(strUbicacion)
@@ -123,7 +130,7 @@ Public Class frmMain
     Private Sub GenerateClassBE_CSHARP(ByRef drTable As DataRow)
         Try
 
-            Dim strUbicacion As String = Me.txtCarpetaDestino.Text & "\BE"
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\BE"
 
             If Not Directory.Exists(strUbicacion) Then
                 Directory.CreateDirectory(strUbicacion)
@@ -236,7 +243,7 @@ Public Class frmMain
     Private Sub GenerateClassLN_VBNET(ByRef drTable As DataRow)
         Try
 
-            Dim strUbicacion As String = Me.txtCarpetaDestino.Text & "\LN"
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\LN"
 
             If Not Directory.Exists(strUbicacion) Then
                 Directory.CreateDirectory(strUbicacion)
@@ -619,7 +626,7 @@ Public Class frmMain
     Private Sub GenerateClassLN_CSHARP(ByRef drTable As DataRow)
         Try
 
-            Dim strUbicacion As String = Me.txtCarpetaDestino.Text & "\LN"
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\LN"
 
             If Not Directory.Exists(strUbicacion) Then
                 Directory.CreateDirectory(strUbicacion)
@@ -1029,7 +1036,7 @@ Public Class frmMain
     Private Sub GenerateScriptsSQL(ByRef drTable As DataRow)
         Try
 
-            Dim strUbicacion As String = Me.txtCarpetaDestino.Text & "\SQL"
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\SQL"
 
             If Not Directory.Exists(strUbicacion) Then
                 Directory.CreateDirectory(strUbicacion)
@@ -1546,6 +1553,8 @@ Public Class frmMain
 
     End Function
 
+#Region "Form methods"
+
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
 
@@ -1558,7 +1567,7 @@ Public Class frmMain
             'Cambiar lenguaje de formulario
             Dim lenguaje As String = CultureInfo.CurrentCulture.Parent.Name
             Me.SuspendLayout()
-            Dim resources As ComponentResourceManager = New ComponentResourceManager(GetType(frmMain))
+            Dim resources As ComponentResourceManager = New ComponentResourceManager(GetType(FrmMain))
             resources.ApplyResources(Me, "$this", New CultureInfo(lenguaje))
             For Each c As Control In Me.Controls
                 resources.ApplyResources(c, c.Name, New CultureInfo(lenguaje))
@@ -1573,6 +1582,7 @@ Public Class frmMain
             'Mostrar la version del sofware
             Me.lblVersion.Text = $"Version {Assembly.GetExecutingAssembly().GetName().Version.ToString()}"
 
+            'Load table 
             dtTablas = New DataTable
             dtTablas.Columns.Add("Id", System.Type.GetType("System.Int32"))
             dtTablas.Columns.Add("Nombre", System.Type.GetType("System.String"))
@@ -1592,63 +1602,54 @@ Public Class frmMain
                 .ReadOnly = False
                 .Width = 20
             End With
-            Me.dgvTablas.Columns.Insert(0, chkEdit)
+            Me.dgvTables.Columns.Insert(0, chkEdit)
 
-            For Each col As DataGridViewColumn In Me.dgvTablas.Columns
+            For Each col As DataGridViewColumn In Me.dgvTables.Columns
                 col.SortMode = DataGridViewColumnSortMode.NotSortable
             Next
 
-            With Me.dgvTablas
 
-                .RowTemplate.Resizable = DataGridViewTriState.False
+            Me.dgvTables.DataSource = Me.dtTablas
+            Util.FormatDatagridview(Me.dgvTables)
 
-                .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
-                .ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-
-                .SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                .EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2
-                .MultiSelect = False
-                .AllowDrop = False
-                .RowHeadersVisible = False
-
+            With Me.dgvTables
                 .ReadOnly = False
-                .AllowUserToAddRows = False
-                .AllowUserToDeleteRows = False
-
-                .DataSource = Me.dtTablas
 
                 .Columns("Id").Visible = False
                 .Columns("Id").ReadOnly = True
-                .Columns("Nombre").Width = .Width - 40
-                .Columns("Nombre").ReadOnly = True
 
+                .Columns("Nombre").Width = 400
+                .Columns("Nombre").Visible = True
+                .Columns("Nombre").ReadOnly = True
             End With
 
+            Util.AutoWidthColumn(Me.dgvTables, "Nombre")
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Util.ErrorMessage(Me.Text, ex.Message)
         End Try
     End Sub
 
-    Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
+    Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         Try
 
             'Validaciones
             '=====================================================================================================
-            If Me.txtCarpetaDestino.TextLength = 0 Then Throw New Exception("No ingreso la Carpeta Destino donde se generaran los archivo, porfavor verifique.")
+            If Me.txtTargetFolder.TextLength = 0 Then Throw New Exception("No ingreso la Carpeta Destino donde se generaran los archivo, porfavor verifique.")
 
-            If Me.txtServidor.TextLength = 0 Then Throw New Exception("No ingreso el Servidor de Base de Datos, porfavor verifique.")
-            If Me.txtUsuario.TextLength = 0 Then Throw New Exception("No ingreso el Usuario de Base de Datos, porfavor verifique.")
-            If Me.txtClave.TextLength = 0 Then Throw New Exception("No ingreso la Clave de Base de Datos, porfavor verifique.")
+            If Me.txtServer.TextLength = 0 Then Throw New Exception("No ingreso el Servidor de Base de Datos, porfavor verifique.")
+            If Me.txtUsername.TextLength = 0 Then Throw New Exception("No ingreso el Usuario de Base de Datos, porfavor verifique.")
+            If Me.txtPassword.TextLength = 0 Then Throw New Exception("No ingreso la Clave de Base de Datos, porfavor verifique.")
 
-            If Me.cboBaseDatos.DataSource Is Nothing Then Throw New Exception("No se cargo la lista de Base de Datos, porfavor verifique.")
-            If Me.cboBaseDatos.SelectedIndex = 0 Then Throw New Exception("No se selecciono la Base de Datos, porfavor verifique.")
+            If Me.cboDatabases.DataSource Is Nothing Then Throw New Exception("No se cargo la lista de Base de Datos, porfavor verifique.")
+            If Me.cboDatabases.SelectedIndex = 0 Then Throw New Exception("No se selecciono la Base de Datos, porfavor verifique.")
             '=====================================================================================================
 
-            Me.strConexion = "Data Source=" & Me.txtServidor.Text & ";Initial Catalog=" & CType(Me.cboBaseDatos.SelectedItem, DataRowView).Item(1).ToString & ";User Id=" & Me.txtUsuario.Text & ";Password=" & Me.txtClave.Text & ";"
+            Me.strConexion = "Data Source=" & Me.txtServer.Text & ";Initial Catalog=" & CType(Me.cboDatabases.SelectedItem, DataRowView).Item(1).ToString & ";User Id=" & Me.txtUsername.Text & ";Password=" & Me.txtPassword.Text & ";"
 
-            Me.Cursor = Cursors.WaitCursor
+            Util.PointerLoad(Me)
 
-            Me.txtTexto.Clear()
+            Me.txtConsole.Clear()
 
             If Me.rdbVBNET.Checked Then
                 Me.sLenguaje = "VBNET"
@@ -1658,14 +1659,14 @@ Public Class frmMain
                 Throw New Exception("No existe el lenguaje seleccionado, porfavor verifique.")
             End If
 
-            Me.txtTexto.Text = Me.txtTexto.Text & "Inicio de la Generacion de Codigo " & vbCrLf
+            Me.txtConsole.Text = Me.txtConsole.Text & "Inicio de la Generacion de Codigo " & vbCrLf
 
             'Dim dtTables As DataTable = GetTables()
             '==================================================================================
             Dim dtTables As New DataTable
             dtTables.Columns.Add("object_id", System.Type.GetType("System.Int32"))
             dtTables.Columns.Add("name", System.Type.GetType("System.String"))
-            For Each drv As DataGridViewRow In Me.dgvTablas.Rows
+            For Each drv As DataGridViewRow In Me.dgvTables.Rows
                 If CType(drv.Cells(0).Value, Boolean) = True Then 'Si esta con CHECK
                     Dim drTable As DataRow = dtTables.NewRow
                     drTable.Item("object_id") = CInt(drv.Cells("Id").Value)
@@ -1698,29 +1699,38 @@ Public Class frmMain
 
             Next
 
-            If Me.chkGenerarSql.Checked Then Me.txtTexto.Text = Me.txtTexto.Text & "- Se genero scripts de SQL" & vbCrLf
-            If Me.chkGenerarBe.Checked Then Me.txtTexto.Text = Me.txtTexto.Text & "- Se genero clases de BE" & vbCrLf
-            If Me.chkGenerarLn.Checked Then Me.txtTexto.Text = Me.txtTexto.Text & "- Se genero clases de LN" & vbCrLf
+            If Me.chkGenerarSql.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero scripts de SQL" & vbCrLf
+            If Me.chkGenerarBe.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero clases de BE" & vbCrLf
+            If Me.chkGenerarLn.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero clases de LN" & vbCrLf
 
-            Me.txtTexto.Text = Me.txtTexto.Text & "Fin de la Generacion de Codigo"
+            Me.txtConsole.Text = Me.txtConsole.Text & "Fin de la Generacion de Codigo"
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Util.ErrorMessage(Me.Text, ex.Message)
         Finally
-            Me.Cursor = Cursors.Arrow
+            Util.PointerReady(Me)
         End Try
     End Sub
 
-    Private Sub btnBaseDatos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaseDatos.Click
+    Private Sub btnBaseDatos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDatabases.Click
         Try
 
-            If Me.txtServidor.TextLength = 0 Then Throw New Exception("No ingreso el Servidor de Base de Datos, porfavor verifique.")
-            If Me.txtUsuario.TextLength = 0 Then Throw New Exception("No ingreso el Usuario de Base de Datos, porfavor verifique.")
-            If Me.txtClave.TextLength = 0 Then Throw New Exception("No ingreso la Clave de Base de Datos, porfavor verifique.")
+            If Me.txtServer.TextLength = 0 Then Throw New Exception("No ingreso el Servidor de Base de Datos, porfavor verifique.")
+            If Me.txtUsername.TextLength = 0 Then Throw New Exception("No ingreso el Usuario de Base de Datos, porfavor verifique.")
+            If Me.txtPassword.TextLength = 0 Then Throw New Exception("No ingreso la Clave de Base de Datos, porfavor verifique.")
 
-            Me.strConexion = "Data Source=" & Me.txtServidor.Text & ";Initial Catalog=master;User Id=" & Me.txtUsuario.Text & ";Password=" & Me.txtClave.Text & ";"
+            Dim strServer As String = Me.txtServer.Text
+            Dim strDB As String = "master"
 
-            Me.Cursor = Cursors.WaitCursor
+            If Me.chkAutentification.Checked Then
+                Me.strConexion = $"Server={strServer};Database={strDB};Trusted_Connection=True;"
+            Else
+                Dim strUser As String = Me.txtUsername.Text
+                Dim strPass As String = Me.txtPassword.Text
+                Me.strConexion = $"Server={strServer};Database={strDB};User Id={strUser};Password={strPass};"
+            End If
+
+            Util.PointerLoad(Me)
 
             Dim dtDbs As DataTable = GetDataBases()
 
@@ -1731,57 +1741,51 @@ Public Class frmMain
             dtDbs.Rows.InsertAt(dr, 0)
             dtDbs.AcceptChanges()
 
-            Me.cboBaseDatos.DataSource = dtDbs
-            Me.cboBaseDatos.DisplayMember = dtDbs.Columns(1).Caption
-            Me.cboBaseDatos.ValueMember = dtDbs.Columns(0).Caption
+            Me.cboDatabases.DataSource = dtDbs
+            Me.cboDatabases.DisplayMember = dtDbs.Columns(1).Caption
+            Me.cboDatabases.ValueMember = dtDbs.Columns(0).Caption
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Util.ErrorMessage(Me.Text, ex.Message)
         Finally
-            Me.Cursor = Cursors.Arrow
+            Util.PointerReady(Me)
         End Try
     End Sub
 
-    Private Sub utxtAll_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-        Try
-            Me.cboBaseDatos.DataSource = Nothing
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Private Sub btnCarpetaDestino_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCarpetaDestino.Click
+    Private Sub btnCarpetaDestino_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTargetFolder.Click
         Try
 
             With Me.fbdCarpetaDestino
                 .RootFolder = Environment.SpecialFolder.Desktop
                 .Description = "Seleccione la Carpeta Destino"
                 If .ShowDialog = DialogResult.OK Then
-                    Me.txtCarpetaDestino.Text = .SelectedPath
+                    Me.txtTargetFolder.Text = .SelectedPath
                 End If
             End With
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Util.ErrorMessage(Me.Text, ex.Message)
         End Try
     End Sub
 
-    Private Sub chkAutentificacion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAutentificacion.CheckedChanged
+    Private Sub chkAutentificacion_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAutentification.CheckedChanged
         Try
-            Me.txtUsuario.ReadOnly = Me.chkAutentificacion.Checked
-            Me.txtClave.ReadOnly = Me.chkAutentificacion.Checked
+            Me.txtUsername.ReadOnly = Me.chkAutentification.Checked
+            Me.txtPassword.ReadOnly = Me.chkAutentification.Checked
         Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Util.ErrorMessage(Me.Text, ex.Message)
         End Try
     End Sub
 
-    Private Sub cboBaseDatos_SelectionChangeCommitted(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboBaseDatos.SelectionChangeCommitted
+    Private Sub cboBaseDatos_SelectionChangeCommitted(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboDatabases.SelectionChangeCommitted
         Try
+
+            Me.bSelected = False
 
             Me.dtTablas.Rows.Clear()
 
-            If Me.cboBaseDatos.SelectedIndex = 0 Then
-                For i As Integer = 0 To 5
+            If Me.cboDatabases.SelectedIndex = 0 Then
+                For i As Integer = 0 To 10
                     Dim drTabla As DataRow = Me.dtTablas.NewRow
                     drTabla.Item("Id") = 0
                     drTabla.Item("Nombre") = ""
@@ -1791,17 +1795,29 @@ Public Class frmMain
                 Exit Sub
             End If
 
-            Me.strConexion = "Data Source=" & Me.txtServidor.Text & ";Initial Catalog=" & CType(Me.cboBaseDatos.SelectedItem, DataRowView).Item(1).ToString & ";User Id=" & Me.txtUsuario.Text & ";Password=" & Me.txtClave.Text & ";"
-            Me.Cursor = Cursors.WaitCursor
+            Dim strServer As String = Me.txtServer.Text
+            Dim strDB As String = CType(Me.cboDatabases.SelectedItem, DataRowView).Item(1).ToString
+
+            If Me.chkAutentification.Checked Then
+                Me.strConexion = $"Server={strServer};Database={strDB};Trusted_Connection=True;"
+            Else
+                Dim strUser As String = Me.txtUsername.Text
+                Dim strPass As String = Me.txtPassword.Text
+                Me.strConexion = $"Server={strServer};Database={strDB};User Id={strUser};Password={strPass};"
+            End If
+
+
+            Util.PointerLoad(Me)
 
             Dim dt As DataTable = GetTables()
             If dt.Rows.Count = 0 Then
-                For i As Integer = 0 To 5
+                For i As Integer = 0 To 10
                     Dim drTabla As DataRow = Me.dtTablas.NewRow
                     drTabla.Item("Id") = 0
                     drTabla.Item("Nombre") = ""
                     Me.dtTablas.Rows.Add(drTabla)
                 Next
+                Me.txtRowsCount.Text = "0"
             Else
                 For Each dr As DataRow In dt.Rows
                     Dim drTablas As DataRow = Me.dtTablas.NewRow
@@ -1809,14 +1825,54 @@ Public Class frmMain
                     drTablas.Item("Nombre") = dr.Item("name")
                     Me.dtTablas.Rows.Add(drTablas)
                 Next
+                Me.txtRowsCount.Text = dt.Rows.Count.ToString()
             End If
             Me.dtTablas.AcceptChanges()
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Util.ErrorMessage(Me.Text, ex.Message)
         Finally
-            Me.Cursor = Cursors.Arrow
+            Util.PointerReady(Me)
         End Try
     End Sub
+
+    Private Sub btnServidores_Click(sender As Object, e As EventArgs) Handles btnServer.Click
+        Try
+            Dim frm As FrmServers = FrmServers.Instance
+            If frm.ShowDialog() = DialogResult.OK Then
+                Me.txtServer.Text = frm.Server
+            End If
+        Catch ex As Exception
+            Util.ErrorMessage(Me.Text, ex.Message)
+        Finally
+            Util.PointerReady(Me)
+        End Try
+    End Sub
+
+    Private Sub FrmMain_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
+        Try
+            If Not Me.dgvTables.DataSource Is Nothing Then
+                Util.AutoWidthColumn(Me.dgvTables, "Nombre")
+            End If
+        Catch ex As Exception
+            Util.ErrorMessage(Me.Text, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
+        Try
+
+            Me.bSelected = Not Me.bSelected
+
+            For Each drv As DataGridViewRow In Me.dgvTables.Rows
+                drv.Cells(0).Value = Me.bSelected
+            Next
+
+        Catch ex As Exception
+            Util.ErrorMessage(Me.Text, ex.Message)
+        End Try
+    End Sub
+
+#End Region
 
 End Class
