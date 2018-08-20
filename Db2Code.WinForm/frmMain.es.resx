@@ -134,7 +134,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADW
-        CQAAAk1TRnQBSQFMAgEBAwEAAWABAQFgAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAwEAAWgBAQFoAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -212,6 +212,9 @@
   <data name="lblPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>355, 75</value>
+  </data>
   <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
   </data>
@@ -233,6 +236,9 @@
   <data name="btnTargetFolder.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="btnTargetFolder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>604, 18</value>
+  </data>
   <data name="btnTargetFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
   </data>
@@ -241,6 +247,9 @@
   </data>
   <data name="btnDatabases.ImageIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="btnDatabases.Location" type="System.Drawing.Point, System.Drawing">
+    <value>604, 97</value>
   </data>
   <data name="btnDatabases.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -251,11 +260,17 @@
   <data name="btnGenerate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <data name="btnGenerate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>657, 393</value>
+  </data>
   <data name="btnGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 23</value>
+    <value>115, 23</value>
   </data>
   <data name="btnGenerate.Text" xml:space="preserve">
     <value>Generar</value>
+  </data>
+  <data name="chkGenerarBe.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 71</value>
   </data>
   <data name="chkGenerarBe.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 17</value>
@@ -263,11 +278,17 @@
   <data name="chkGenerarBe.Text" xml:space="preserve">
     <value>Entidades</value>
   </data>
+  <data name="chkGenerarLn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 48</value>
+  </data>
   <data name="chkGenerarLn.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
   </data>
   <data name="chkGenerarLn.Text" xml:space="preserve">
     <value>Lógicas </value>
+  </data>
+  <data name="chkGenerarSql.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 25</value>
   </data>
   <data name="chkGenerarSql.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 17</value>
@@ -284,6 +305,9 @@
   <data name="chkAutentification.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="chkAutentification.Location" type="System.Drawing.Point, System.Drawing">
+    <value>532, 48</value>
+  </data>
   <data name="chkAutentification.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 17</value>
   </data>
@@ -294,13 +318,16 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 20</value>
+    <value>339, 20</value>
   </data>
   <data name="txtUsername.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 20</value>
   </data>
   <data name="txtPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>446, 73</value>
   </data>
   <data name="txtPassword.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
@@ -312,19 +339,22 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtTargetFolder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 20</value>
+    <value>499, 20</value>
   </data>
   <data name="cboDatabases.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="cboDatabases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 21</value>
+    <value>499, 21</value>
   </data>
   <data name="grpLanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="grpLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>657, 207</value>
   </data>
   <data name="grpLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 84</value>
+    <value>115, 177</value>
   </data>
   <data name="grpLanguage.Text" xml:space="preserve">
     <value>Lenguaje</value>
@@ -332,14 +362,29 @@
   <data name="grpCode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="grpCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>657, 73</value>
+  </data>
   <data name="grpCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 100</value>
+    <value>115, 128</value>
   </data>
   <data name="grpCode.Text" xml:space="preserve">
     <value>Codigo</value>
   </data>
   <data name="grpTables.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="grpTables.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="grpTables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>639, 209</value>
+  </data>
+  <data name="grpTables.Text" xml:space="preserve">
+    <value>Tablas</value>
+  </data>
+  <data name="lblRowsCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="lblRowsCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -351,7 +396,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRowsCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>535, 187</value>
+    <value>518, 187</value>
   </data>
   <data name="lblRowsCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 13</value>
@@ -360,7 +405,7 @@
     <value>Nro. Registros</value>
   </data>
   <data name="btnSelectAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Bottom, Left</value>
   </data>
   <data name="btnSelectAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -375,16 +420,16 @@
     <value>Seleccionar Todos</value>
   </data>
   <data name="txtRowsCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="txtRowsCount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="txtRowsCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>615, 183</value>
+    <value>598, 183</value>
   </data>
   <data name="txtRowsCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
+    <value>35, 20</value>
   </data>
   <data name="txtRowsCount.Text" xml:space="preserve">
     <value>0</value>
@@ -396,16 +441,7 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="dgvTables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>645, 158</value>
-  </data>
-  <data name="grpTables.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="grpTables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 209</value>
-  </data>
-  <data name="grpTables.Text" xml:space="preserve">
-    <value>Tablas</value>
+    <value>627, 158</value>
   </data>
   <data name="grpConfiguration.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -419,11 +455,14 @@
   <data name="btnServer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="btnServer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>446, 44</value>
+  </data>
   <data name="btnServer.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
   </data>
   <data name="grpConfiguration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 128</value>
+    <value>639, 128</value>
   </data>
   <data name="grpConfiguration.Text" xml:space="preserve">
     <value>Configuracion</value>
@@ -475,6 +514,18 @@
   </data>
   <data name="txtContact.Text" xml:space="preserve">
     <value>Afu Tse [solapa@gmail.com]</value>
+  </data>
+  <data name="chkGenerarForm.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkGenerarForm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkGenerarForm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="chkGenerarForm.Text" xml:space="preserve">
+    <value>Formularios</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>784, 562</value>

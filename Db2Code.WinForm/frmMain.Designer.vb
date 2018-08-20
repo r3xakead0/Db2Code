@@ -55,6 +55,7 @@ Partial Class FrmMain
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.txtContact = New System.Windows.Forms.TextBox()
+        Me.chkGenerarForm = New System.Windows.Forms.CheckBox()
         Me.grpLanguage.SuspendLayout()
         Me.grpCode.SuspendLayout()
         Me.grpTables.SuspendLayout()
@@ -209,6 +210,7 @@ Partial Class FrmMain
         'grpCode
         '
         resources.ApplyResources(Me.grpCode, "grpCode")
+        Me.grpCode.Controls.Add(Me.chkGenerarForm)
         Me.grpCode.Controls.Add(Me.chkGenerarSql)
         Me.grpCode.Controls.Add(Me.chkGenerarLn)
         Me.grpCode.Controls.Add(Me.chkGenerarBe)
@@ -294,6 +296,12 @@ Partial Class FrmMain
         Me.txtContact.ReadOnly = True
         Me.txtContact.TabStop = False
         '
+        'chkGenerarForm
+        '
+        resources.ApplyResources(Me.chkGenerarForm, "chkGenerarForm")
+        Me.chkGenerarForm.Name = "chkGenerarForm"
+        Me.chkGenerarForm.UseVisualStyleBackColor = True
+        '
         'FrmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -357,4 +365,5 @@ Partial Class FrmMain
     Friend WithEvents lblRowsCount As Label
     Friend WithEvents btnSelectAll As Button
     Friend WithEvents txtRowsCount As TextBox
+    Friend WithEvents chkGenerarForm As CheckBox
 End Class

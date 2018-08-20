@@ -1036,7 +1036,7 @@ Public Class FrmMain
     Private Sub GenerateScriptsSQL(ByRef drTable As DataRow)
         Try
 
-            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\SQL"
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\WinForm"
 
             If Not Directory.Exists(strUbicacion) Then
                 Directory.CreateDirectory(strUbicacion)
@@ -1259,6 +1259,800 @@ Public Class FrmMain
             objReader.WriteLine("GO")
             objReader.WriteLine("")
 
+            objReader.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Private Sub GenerateWinForm_VBNET(ByRef drTable As DataRow)
+        Try
+
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\WinForm"
+
+            If Not Directory.Exists(strUbicacion) Then
+                Directory.CreateDirectory(strUbicacion)
+            End If
+
+            Dim nameTable As String = drTable.Item("name").ToString
+            nameTable = nameTable.Substring(0, 1).ToUpper & nameTable.Substring(1)
+
+            Dim objReader As New StreamWriter(strUbicacion & "\Frm" & nameTable & ".vb")
+
+            objReader.WriteLine("Imports BE")
+            objReader.WriteLine("Imports System.Data.SqlClient")
+            objReader.WriteLine("Imports System.Data")
+            objReader.WriteLine("")
+
+            objReader.WriteLine("Public Class clsLn" & nameTable)
+            objReader.WriteLine("")
+
+            objReader.WriteLine(vbTab & "Dim oConexion As ConnectionManager = Nothing")
+            objReader.WriteLine("")
+            objReader.WriteLine(vbTab & "Public Sub New(ByVal oConexion As ConnectionManager)")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Me.oConexion = oConexion")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Sub")
+            objReader.WriteLine("")
+
+            'Obtenemos las columnas de la tabla
+            Dim dtColumns As DataTable = GetColumns(CInt(drTable.Item("object_id")))
+
+            'Obtiene el PK de la tabla, en caso de no tener PK se obtiene la primera columna
+            Dim drPrimaryKey As DataRow = GetPrimaryKey(CInt(drTable.Item("object_id")))
+            Dim nameColumnPK As String = ""
+            Dim typeColumnPK As String = ""
+            If drPrimaryKey Is Nothing Then
+                nameColumnPK = dtColumns.Rows(0).Item("name").ToString
+                typeColumnPK = GetTypeColumn(CInt(dtColumns.Rows(0).Item("system_type_id"))).Item("name")
+            Else
+                nameColumnPK = drPrimaryKey.Item("name").ToString
+                typeColumnPK = GetTypeColumn(CInt(drPrimaryKey.Item("system_type_id"))).Item("name")
+            End If
+            nameColumnPK = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+            Dim strParameter As String = ""
+
+            'Cargar
+            objReader.WriteLine(vbTab & "Public Sub Cargar(ByRef oBe" & nameTable & " As clsBe" & nameTable & ", ByRef dr As DataRow)")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "With oBe" & nameTable)
+            For i As Integer = 0 To dtColumns.Rows.Count - 1
+                Dim drColumns As DataRow = dtColumns.Rows(i)
+                Dim drType As DataRow = GetTypeColumn(CInt(drColumns.Item("system_type_id")))
+
+                Dim nameColumn As String = drColumns.Item("name").ToString
+                Dim nameColumnCamel As String = nameColumn.Substring(0, 1).ToUpper & nameColumn.Substring(1)
+
+                Dim valueColumn As String = GetDefaultValue(drType.Item("name"))
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "." & nameColumnCamel & " = IIf(IsDBNull(dr.Item(""" & nameColumn & """)), " & valueColumn & ", dr.Item(""" & nameColumn & """))")
+            Next
+            objReader.WriteLine(vbTab & vbTab & vbTab & "End With")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Sub")
+
+            objReader.WriteLine("")
+
+            'Insert
+            objReader.WriteLine(vbTab & "Public Function Insertar(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Integer")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Insertar""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlClient.SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim rowsAffected As Integer = 0")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Open()")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            For i As Integer = 0 To dtColumns.Rows.Count - 1
+                Dim drColumns As DataRow = dtColumns.Rows(i)
+                Dim nameColumn As String = drColumns.Item("name").ToString
+                Dim nameColumnUpper As String = nameColumn.ToUpper
+                Dim nameColumnCamel As String = nameColumn.Substring(0, 1).ToUpper & nameColumn.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters.Add(New SqlClient.SqlParameter(""@" & nameColumnUpper & """, oBe" & nameTable & "." & nameColumnCamel & "))")
+
+                If nameColumnPK = nameColumn Then
+                    objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters(""@" & nameColumnUpper & """).Direction = ParameterDirection.Output")
+                End If
+            Next
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "rowsAffected = cmd.ExecuteNonQuery()")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+                Dim convertType As String = GetConvertType(typeColumnPK)
+
+                If convertType.Length > 0 Then
+                    objReader.WriteLine(vbTab & vbTab & vbTab & "oBe" & nameTable & "." & nameColumnPKCamel & " = " & convertType & "(cmd.Parameters(""@" & nameColumnPKUpper & """).Value)")
+                Else
+                    objReader.WriteLine(vbTab & vbTab & vbTab & "oBe" & nameTable & "." & nameColumnPKCamel & " = " & "cmd.Parameters(""@" & nameColumnPKUpper & """).Value")
+                End If
+            End If
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return rowsAffected")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'Update
+            objReader.WriteLine(vbTab & "Public Function Actualizar(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Integer")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Actualizar""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlClient.SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim rowsAffected As Integer = 0")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Open()")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            For i As Integer = 0 To dtColumns.Rows.Count - 1
+                Dim drColumns As DataRow = dtColumns.Rows(i)
+                Dim nameColumn As String = drColumns.Item("name").ToString
+                Dim nameColumnUpper As String = nameColumn.ToUpper
+                Dim nameColumnCamel As String = nameColumn.Substring(0, 1).ToUpper & nameColumn.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters.Add(New SqlClient.SqlParameter(""@" & nameColumnUpper & """, oBe" & nameTable & "." & nameColumnCamel & "))")
+            Next
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "rowsAffected = cmd.ExecuteNonQuery()")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return rowsAffected")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'Delete
+            objReader.WriteLine(vbTab & "Public Function Eliminar(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Integer")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Eliminar""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlClient.SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim rowsAffected As Integer = 0")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Open()")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters.Add(New SqlClient.SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "))")
+            End If
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "rowsAffected = cmd.ExecuteNonQuery()")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return rowsAffected")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'List
+            objReader.WriteLine(vbTab & "Public Function Listar() As DataTable")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Listar""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dad As New SqlDataAdapter(cmd)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dt As New DataTable")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return dt")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'Get
+            objReader.WriteLine(vbTab & "Public Function Obtener(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Boolean")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Obtener""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dad As New SqlDataAdapter(cmd)")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "dad.SelectCommand.Parameters.Add(New SqlClient.SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "))")
+            End If
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dt As New DataTable")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "If dt.Rows.Count = 1 Then")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(oBe" & nameTable & ", dt.Rows(0))")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Else")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Throw New Exception(""No se pudo obtener el registro"")")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "End If")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return True")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'First
+            objReader.WriteLine(vbTab & "Public Function Primero(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Boolean")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Primero""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dad As New SqlDataAdapter(cmd)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dt As New DataTable")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "If dt.Rows.Count = 1 Then")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(oBe" & nameTable & ", dt.Rows(0))")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Else")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Throw New Exception(""No se pudo obtener el primer registro"")")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "End If")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return True")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'Last
+            objReader.WriteLine(vbTab & "Public Function Ultimo(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Boolean")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Ultimo""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dad As New SqlDataAdapter(cmd)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dt As New DataTable")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "If dt.Rows.Count = 1 Then")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(oBe" & nameTable & ", dt.Rows(0))")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Else")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Throw New Exception(""No se pudo obtener el ultimo registro"")")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "End If")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return True")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'Previeus
+            objReader.WriteLine(vbTab & "Public Function Anterior(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Boolean")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Anterior""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dad As New SqlDataAdapter(cmd)")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "dad.SelectCommand.Parameters.Add(New SqlClient.SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "))")
+            End If
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dt As New DataTable")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "If dt.Rows.Count = 1 Then")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(oBe" & nameTable & ", dt.Rows(0))")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Else")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Throw New Exception(""No se pudo obtener el anterior registro"")")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "End If")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return True")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            'Next
+            objReader.WriteLine(vbTab & "Public Function Siguiente(ByRef oBe" & nameTable & " As clsBe" & nameTable & ") As Boolean")
+            objReader.WriteLine(vbTab & vbTab & "Try")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim sp As String = ""Sp" & nameTable & "Siguiente""")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cnn As New SqlConnection(oConexion.ConexionLocal)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim cmd As New SqlCommand(sp, cnn)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dad As New SqlDataAdapter(cmd)")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "dad.SelectCommand.Parameters.Add(New SqlClient.SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "))")
+            End If
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Dim dt As New DataTable")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt)")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "If dt.Rows.Count = 1 Then")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(oBe" & nameTable & ", dt.Rows(0))")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Else")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Throw New Exception(""No se pudo obtener el siguiente registro"")")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "End If")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Return True")
+            objReader.WriteLine(vbTab & vbTab & "Catch ex As Exception")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "Throw ex")
+            objReader.WriteLine(vbTab & vbTab & "End Try")
+            objReader.WriteLine(vbTab & "End Function")
+
+            objReader.WriteLine("")
+
+            objReader.WriteLine("End Class")
+            objReader.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub GenerateWinForm_CSHARP(ByRef drTable As DataRow)
+        Try
+
+            Dim strUbicacion As String = Me.txtTargetFolder.Text & "\WinForm"
+
+            If Not Directory.Exists(strUbicacion) Then
+                Directory.CreateDirectory(strUbicacion)
+            End If
+
+            Dim nameTable As String = drTable.Item("name").ToString
+            nameTable = nameTable.Substring(0, 1).ToUpper & nameTable.Substring(1)
+
+            Dim objReader As New StreamWriter(strUbicacion & "\Frm" & nameTable & ".cs")
+
+            objReader.WriteLine("using BE;")
+            objReader.WriteLine("using System.Data.SqlClient;")
+            objReader.WriteLine("using System.Data;")
+            objReader.WriteLine("using System;")
+            objReader.WriteLine("")
+
+            objReader.WriteLine("public class clsLn" & nameTable & " {")
+            objReader.WriteLine("")
+
+            objReader.WriteLine(vbTab & "private ConnectionManager oConexion = null;")
+            objReader.WriteLine("")
+            objReader.WriteLine(vbTab & " public clsLn" & nameTable & "(ConnectionManager oConexion) {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "this.oConexion = oConexion;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+            objReader.WriteLine("")
+
+            'Obtenemos las columnas de la tabla
+            Dim dtColumns As DataTable = GetColumns(CInt(drTable.Item("object_id")))
+
+            'Obtiene el PK de la tabla, en caso de no tener PK se obtiene la primera columna
+            Dim drPrimaryKey As DataRow = GetPrimaryKey(CInt(drTable.Item("object_id")))
+            Dim nameColumnPK As String = ""
+            Dim typeColumnPK As String = ""
+            If drPrimaryKey Is Nothing Then
+                nameColumnPK = dtColumns.Rows(0).Item("name").ToString
+                typeColumnPK = GetTypeColumn(CInt(dtColumns.Rows(0).Item("system_type_id"))).Item("name")
+            Else
+                nameColumnPK = drPrimaryKey.Item("name").ToString
+                typeColumnPK = GetTypeColumn(CInt(drPrimaryKey.Item("system_type_id"))).Item("name")
+            End If
+            nameColumnPK = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+            Dim strParameter As String = ""
+
+            'Cargar
+            objReader.WriteLine(vbTab & "public void Cargar(ref clsBe" & nameTable & " oBe" & nameTable & ", ref DataRow dr) {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            For i As Integer = 0 To dtColumns.Rows.Count - 1
+                Dim drColumns As DataRow = dtColumns.Rows(i)
+                Dim drType As DataRow = GetTypeColumn(CInt(drColumns.Item("system_type_id")))
+
+                Dim nameColumn As String = drColumns.Item("name").ToString
+                Dim nameColumnCamel As String = nameColumn.Substring(0, 1).ToUpper & nameColumn.Substring(1)
+
+                Dim valueColumn As String = GetDefaultValue(drType.Item("name"), "CSHARP")
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "oBe" & nameTable & "." & nameColumnCamel & " = dr[""" & nameColumn & """] == DBNull.Value ? " & valueColumn & " : dr[""" & nameColumn & """].ToString();")
+            Next
+
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Insert
+            'public int Insertar(ref clsBeTbUsuarios oBeTbUsuarios) {
+            objReader.WriteLine(vbTab & "public int Insertar(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Insertar"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "int rowsAffected = 0;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cnn.Open();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            For i As Integer = 0 To dtColumns.Rows.Count - 1
+                Dim drColumns As DataRow = dtColumns.Rows(i)
+                Dim nameColumn As String = drColumns.Item("name").ToString
+                Dim nameColumnUpper As String = nameColumn.ToUpper
+                Dim nameColumnCamel As String = nameColumn.Substring(0, 1).ToUpper & nameColumn.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters.Add(new SqlParameter(""@" & nameColumnUpper & """, oBe" & nameTable & "." & nameColumnCamel & "));")
+
+                If nameColumnPK = nameColumn Then
+                    objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters[""@" & nameColumnUpper & """].Direction = ParameterDirection.Output;")
+                End If
+            Next
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "rowsAffected = cmd.ExecuteNonQuery();")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+                Dim convertType As String = GetConvertType(typeColumnPK, "CSHARP")
+
+                If convertType.Length > 0 Then
+                    objReader.WriteLine(vbTab & vbTab & vbTab & "oBe" & nameTable & "." & nameColumnPKCamel & " = " & convertType & "(cmd.Parameters[""@" & nameColumnPKUpper & """].Value.ToString());")
+                Else
+                    objReader.WriteLine(vbTab & vbTab & vbTab & "oBe" & nameTable & "." & nameColumnPKCamel & " = " & "cmd.Parameters[""@" & nameColumnPKUpper & """].Value.ToString();")
+                End If
+            End If
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return rowsAffected;")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Update
+            objReader.WriteLine(vbTab & "public int Actualizar(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Actualizar"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "int rowsAffected = 0;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cnn.Open();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            For i As Integer = 0 To dtColumns.Rows.Count - 1
+                Dim drColumns As DataRow = dtColumns.Rows(i)
+                Dim nameColumn As String = drColumns.Item("name").ToString
+                Dim nameColumnUpper As String = nameColumn.ToUpper
+                Dim nameColumnCamel As String = nameColumn.Substring(0, 1).ToUpper & nameColumn.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters.Add(new SqlParameter(""@" & nameColumnUpper & """, oBe" & nameTable & "." & nameColumnCamel & "));")
+            Next
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "rowsAffected = cmd.ExecuteNonQuery();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return rowsAffected;")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Delete
+            objReader.WriteLine(vbTab & "public int Eliminar(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Eliminar"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "int rowsAffected = 0;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cnn.Open();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.Parameters.Add(new SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "));")
+            End If
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "rowsAffected = cmd.ExecuteNonQuery();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return rowsAffected;")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'List,
+            objReader.WriteLine(vbTab & "public DataTable Listar() {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Listar"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlDataAdapter dad = new SqlDataAdapter(cmd);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "DataTable dt = new DataTable();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return dt;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Get
+            objReader.WriteLine(vbTab & "public bool Obtener(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Obtener"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlDataAdapter dad = new SqlDataAdapter(cmd);")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "dad.SelectCommand.Parameters.Add(new SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "));")
+            End If
+
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "DataTable dt = new DataTable();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "if ((dt.Rows.Count == 1)) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "DataRow dr = dt.Rows[0];")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(ref oBe" & nameTable & ", ref dr);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "else {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "throw new Exception(""No se pudo obtener el registro"");")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return true;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'First
+            objReader.WriteLine(vbTab & "public bool Primero(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Primero"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlDataAdapter dad = new SqlDataAdapter(cmd);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "DataTable dt = new DataTable();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "if ((dt.Rows.Count == 1)) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "DataRow dr = dt.Rows[0];")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(ref oBe" & nameTable & ", ref dr);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "else {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "throw new Exception(""No se pudo obtener el primer registro"");")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return true;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Last
+            objReader.WriteLine(vbTab & "public bool Ultimo(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Ultimo"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlDataAdapter dad = new SqlDataAdapter(cmd);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "DataTable dt = new DataTable();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "if ((dt.Rows.Count == 1)) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "DataRow dr = dt.Rows[0];")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(ref oBe" & nameTable & ", ref dr);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "else {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "throw new Exception(""No se pudo obtener el ultimo registro"");")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return true;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Previeus
+            objReader.WriteLine(vbTab & "public bool Anterior(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Anterior"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlDataAdapter dad = new SqlDataAdapter(cmd);")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "dad.SelectCommand.Parameters.Add(new SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "));")
+            End If
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "DataTable dt = new DataTable();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "if ((dt.Rows.Count == 1)) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "DataRow dr = dt.Rows[0];")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(ref oBe" & nameTable & ", ref dr);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "else {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "throw new Exception(""No se pudo obtener el anterior registro"");")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return true;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            'Next
+            objReader.WriteLine(vbTab & "public bool Siguiente(ref clsBe" & nameTable & " oBe" & nameTable & ") {")
+            objReader.WriteLine(vbTab & vbTab & "try {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "string sp = ""Sp" & nameTable & "Siguiente"";")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlConnection cnn = new SqlConnection(oConexion.ConexionLocal);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlCommand cmd = new SqlCommand(sp, cnn);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "cmd.CommandType = CommandType.StoredProcedure;")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "SqlDataAdapter dad = new SqlDataAdapter(cmd);")
+            If nameColumnPK.Length > 0 Then
+                Dim nameColumnPKUpper As String = nameColumnPK.ToUpper
+                Dim nameColumnPKCamel As String = nameColumnPK.Substring(0, 1).ToUpper & nameColumnPK.Substring(1)
+
+                objReader.WriteLine(vbTab & vbTab & vbTab & "dad.SelectCommand.Parameters.Add(new SqlParameter(""@" & nameColumnPKUpper & """, oBe" & nameTable & "." & nameColumnPKCamel & "));")
+            End If
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "DataTable dt = new DataTable();")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "dad.Fill(dt);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "if ((dt.Rows.Count == 1)) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "DataRow dr = dt.Rows[0];")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "Cargar(ref oBe" & nameTable & ", ref dr);")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "else {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & vbTab & "throw new Exception(""No se pudo obtener el siguiente registro"");")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "return true;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & vbTab & "catch (Exception ex) {")
+            objReader.WriteLine(vbTab & vbTab & vbTab & "throw ex;")
+            objReader.WriteLine(vbTab & vbTab & "}")
+            objReader.WriteLine(vbTab & "}")
+
+            objReader.WriteLine("")
+
+            objReader.WriteLine("}")
             objReader.Close()
 
         Catch ex As Exception
@@ -1697,11 +2491,20 @@ Public Class FrmMain
                     End If
                 End If
 
+                If Me.chkGenerarForm.Checked Then
+                    If Me.sLenguaje = "VBNET" Then
+                        GenerateWinForm_VBNET(drTable)
+                    ElseIf Me.sLenguaje = "CSHARP" Then
+                        GenerateWinForm_CSHARP(drTable)
+                    End If
+                End If
+
             Next
 
             If Me.chkGenerarSql.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero scripts de SQL" & vbCrLf
             If Me.chkGenerarBe.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero clases de BE" & vbCrLf
             If Me.chkGenerarLn.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero clases de LN" & vbCrLf
+            If Me.chkGenerarForm.Checked Then Me.txtConsole.Text = Me.txtConsole.Text & "- Se genero clases de Formularios" & vbCrLf
 
             Me.txtConsole.Text = Me.txtConsole.Text & "Fin de la Generacion de Codigo"
 
