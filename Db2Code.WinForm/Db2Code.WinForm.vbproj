@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Db2Code.Winform.My.MyApplication</StartupObject>
     <RootNamespace>Db2Code.Winform</RootNamespace>
-    <AssemblyName>Db2Code.Winform</AssemblyName>
+    <AssemblyName>Db2Code</AssemblyName>
     <MyType>WindowsForms</MyType>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -49,7 +49,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Db2Code.Winform.xml</DocumentationFile>
+    <DocumentationFile>Db2Code.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -61,7 +61,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Db2Code.Winform.xml</DocumentationFile>
+    <DocumentationFile>Db2Code.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>

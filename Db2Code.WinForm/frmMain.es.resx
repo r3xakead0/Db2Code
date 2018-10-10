@@ -134,7 +134,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADW
-        CQAAAk1TRnQBSQFMAgEBAwEAAWgBAQFoAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAwEAAXgBAQF4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -347,6 +347,9 @@
   <data name="cboDatabases.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 21</value>
   </data>
+  <data name="rdbVBNET.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="grpLanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
@@ -361,6 +364,21 @@
   </data>
   <data name="grpCode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="chkGenerarForm.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkGenerarForm.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="chkGenerarForm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkGenerarForm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="chkGenerarForm.Text" xml:space="preserve">
+    <value>Formularios</value>
   </data>
   <data name="grpCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>657, 73</value>
@@ -446,6 +464,12 @@
   <data name="grpConfiguration.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="grpConfiguration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>639, 128</value>
+  </data>
+  <data name="grpConfiguration.Text" xml:space="preserve">
+    <value>Configuracion</value>
+  </data>
   <data name="btnServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -460,12 +484,6 @@
   </data>
   <data name="btnServer.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
-  </data>
-  <data name="grpConfiguration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>639, 128</value>
-  </data>
-  <data name="grpConfiguration.Text" xml:space="preserve">
-    <value>Configuracion</value>
   </data>
   <data name="lblVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -514,18 +532,6 @@
   </data>
   <data name="txtContact.Text" xml:space="preserve">
     <value>Afu Tse [solapa@gmail.com]</value>
-  </data>
-  <data name="chkGenerarForm.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkGenerarForm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkGenerarForm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 17</value>
-  </data>
-  <data name="chkGenerarForm.Text" xml:space="preserve">
-    <value>Formularios</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>784, 562</value>

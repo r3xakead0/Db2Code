@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Db2Code.Library</RootNamespace>
-    <AssemblyName>Db2Code.Library</AssemblyName>
+    <AssemblyName>Library</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -48,7 +48,7 @@
     <Compile Include="Poco\Table.cs" />
     <Compile Include="Poco\DataBase.cs" />
     <Compile Include="IGenerate.cs" />
-    <Compile Include="Cshard.cs" />
+    <Compile Include="Csharp.cs" />
     <Compile Include="Mssql.cs" />
     <Compile Include="Vbnet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

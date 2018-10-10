@@ -2,9 +2,10 @@
 
 namespace Db2Code.Library
 {
-    public interface IGenerateClass
+    public interface IGenerate
     {
-        bool BusinessEntity(Table table);
-        bool BusinessLogic(Table table);
+        void BusinessEntity(Table table);
+        void BusinessLogic(Table table);
+        void WindowsForm(Table table);
     }
 }

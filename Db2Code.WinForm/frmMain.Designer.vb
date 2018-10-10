@@ -45,6 +45,7 @@ Partial Class FrmMain
         Me.rdbCSHARP = New System.Windows.Forms.RadioButton()
         Me.grpLanguage = New System.Windows.Forms.GroupBox()
         Me.grpCode = New System.Windows.Forms.GroupBox()
+        Me.chkGenerarForm = New System.Windows.Forms.CheckBox()
         Me.grpTables = New System.Windows.Forms.GroupBox()
         Me.lblRowsCount = New System.Windows.Forms.Label()
         Me.btnSelectAll = New System.Windows.Forms.Button()
@@ -55,7 +56,6 @@ Partial Class FrmMain
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.txtContact = New System.Windows.Forms.TextBox()
-        Me.chkGenerarForm = New System.Windows.Forms.CheckBox()
         Me.grpLanguage.SuspendLayout()
         Me.grpCode.SuspendLayout()
         Me.grpTables.SuspendLayout()
@@ -187,14 +187,13 @@ Partial Class FrmMain
         'rdbVBNET
         '
         resources.ApplyResources(Me.rdbVBNET, "rdbVBNET")
-        Me.rdbVBNET.Checked = True
         Me.rdbVBNET.Name = "rdbVBNET"
-        Me.rdbVBNET.TabStop = True
         Me.rdbVBNET.UseVisualStyleBackColor = True
         '
         'rdbCSHARP
         '
         resources.ApplyResources(Me.rdbCSHARP, "rdbCSHARP")
+        Me.rdbCSHARP.Checked = True
         Me.rdbCSHARP.Name = "rdbCSHARP"
         Me.rdbCSHARP.TabStop = True
         Me.rdbCSHARP.UseVisualStyleBackColor = True
@@ -216,6 +215,12 @@ Partial Class FrmMain
         Me.grpCode.Controls.Add(Me.chkGenerarBe)
         Me.grpCode.Name = "grpCode"
         Me.grpCode.TabStop = False
+        '
+        'chkGenerarForm
+        '
+        resources.ApplyResources(Me.chkGenerarForm, "chkGenerarForm")
+        Me.chkGenerarForm.Name = "chkGenerarForm"
+        Me.chkGenerarForm.UseVisualStyleBackColor = True
         '
         'grpTables
         '
@@ -295,12 +300,6 @@ Partial Class FrmMain
         Me.txtContact.Name = "txtContact"
         Me.txtContact.ReadOnly = True
         Me.txtContact.TabStop = False
-        '
-        'chkGenerarForm
-        '
-        resources.ApplyResources(Me.chkGenerarForm, "chkGenerarForm")
-        Me.chkGenerarForm.Name = "chkGenerarForm"
-        Me.chkGenerarForm.UseVisualStyleBackColor = True
         '
         'FrmMain
         '

@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using Db2Code.Library.Poco;
 
 namespace Db2Code.Library
 {
-    public class Vbnet : IGenerateClass
+    public class Vbnet : IGenerate
     {
+        private string PathRoot = "";
+        private Mssql Database = null;
 
-        public Vbnet()
+        public Vbnet(string path, Mssql database)
         {
-
+            this.PathRoot = path;
+            this.Database = database;
         }
 
-        public bool BusinessEntity(Table table)
+        public void BusinessEntity(Table table)
         {
-            bool flg = false;
             try
             {
-                string nameTable = StringExtension.ToPascalCase(table.Name);
-
-                return flg;
+                
             }
             catch (Exception ex)
             { 
@@ -27,13 +26,23 @@ namespace Db2Code.Library
             }
         }
 
-        public bool BusinessLogic(Table table)
+        public void BusinessLogic(Table table)
         {
-            bool flg = false;
             try
             {
 
-                return flg;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void WindowsForm(Table table)
+        {
+            try
+            {
+
             }
             catch (Exception ex)
             {
